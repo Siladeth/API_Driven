@@ -27,21 +27,23 @@ Le projet est entièrement automatisé pour garantir la reproductibilité.
 Dans votre terminal Codespace, installez les outils nécessaires :
 
 # Activation de l'environnement virtuel et installation des outils
+```
 python3 -m venv venv
 source venv/bin/activate
 pip install localstack awscli-local boto3
-
+```
 Lancement de LocalStack
 
 localstack start -d
 # Attendez quelques secondes que les services soient prêts
+```
 localstack status services
-
+```
 Déploiement automatique
-
+```
 chmod +x deploy.sh
 ./deploy.sh
-
+```
 🚦 Guide d'utilisation (Test de l'API)
 
 Une fois le déploiement terminé, récupérez l'URL publique du port 4566 dans l'onglet PORTS de votre Codespace.
@@ -49,12 +51,14 @@ Une fois le déploiement terminé, récupérez l'URL publique du port 4566 dans 
 Envoyer une commande d'arrêt (Stop)
 Remplacez [VOTRE_ID_API] et [VOTRE_URL_CODESPACE] dans la commande suivante :
 
-
+```
 curl -X POST https://[VOTRE_URL_CODESPACE]/restapis/[VOTRE_ID_API]/prod/_user_request_/manage \
      -H "Content-Type: application/json" \
      -d '{"action": "stop", "instance_id": "i-1234567890abcdef0"}'
+```
      
 Vérifier le statut de l'infrastructure
 Pour confirmer que l'API a bien piloté l'EC2, vérifiez l'état de l'instance :
-
+```
 awslocal ec2 describe-instances --query 'Reservations[0].Instances[0].State.Name'
+```
