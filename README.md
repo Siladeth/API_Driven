@@ -33,8 +33,9 @@ source venv/bin/activate
 pip install localstack awscli-local boto3
 ```
 Lancement de LocalStack
-
+```
 localstack start -d
+```
 # Attendez quelques secondes que les services soient prêts
 ```
 localstack status services
